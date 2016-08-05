@@ -1,4 +1,6 @@
 var Deeplink = (function() {
+  "use strict";
+
   var Deeplink = function(params) {
     this.appDeeplinkURL = params.appDeeplinkURL;
     this.webFallbackURL = params.webFallbackURL;
@@ -11,7 +13,6 @@ var Deeplink = (function() {
 
     var fallbackTimeout = setTimeout(function(){
       iframe.parentNode.removeChild(iframe);
-      console.log(self.webFallbackURL);
       window.open(self.webFallbackURL, '_blank');
     }, this.fallbackDelay);
 
