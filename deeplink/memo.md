@@ -70,15 +70,6 @@ setTimeout(() => { location.href = appUri }, 500);
   - webページに遷移できる
 
 
-- fb.html
-  - アプリへ遷移出来る
-- tw.html
-  - アプリへ遷移出来る
-- dummy.html
-  - 何も表示されない
-  - エラーのmodalもなし
-
-
 ## ポップアップのブロック
 
 - クリックの伴わない`window.open`を呼ぶとポップアップと判断される

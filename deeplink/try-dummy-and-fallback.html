@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
 </head>
 <body>
   <p id="ad">クリック</p>
@@ -12,13 +14,13 @@
 
   var deeplink = new Deeplink({
     appDeeplinkURL: "dummy://no-such-app",
-    webFallbackURL: "http://example.com",
+    webFallbackURL: "https://example.com",
     fallbackDelay: 500
   });
 
   var a = document.getElementById('ad');
   a.onclick = function(){
-    console.log(1);
+    console.log("clicked:" + Date.now());
     deeplink.open()
   };
 
