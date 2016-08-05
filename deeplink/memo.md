@@ -1,3 +1,5 @@
+
+
 # 単純に遷移させる
 
 単純に遷移させるだけ
@@ -6,17 +8,8 @@
 window.location.href = "fb://profile";
 ```
 
-## fbアプリだけ入ってるiPodTouch
 
-- fb.html
-  - アプリへ遷移出来る
-- tw.html
-  - エラー: `ページが開けません アドレスが無効です`
-- dummy.html
-  - エラー: `ページが開けません アドレスが無効です`
-
-
-## fb, twアプリ両方入ってるiPhone6
+## iOS9 (iPhone6) fb, twアプリ両方入ってる
 
 - fb.html
   - アプリへ遷移出来る
@@ -25,6 +18,26 @@ window.location.href = "fb://profile";
 - dummy.html
   - エラー: `ページが開けません アドレスが無効です`
 
+
+## Android6 (xperia) fb, twアプリ両方入ってる
+
+- fb.html
+  - アプリへ遷移出来る
+- tw.html
+  - アプリへ遷移出来る
+- dummy.html
+  - 何も表示されない
+  - エラーのmodalもなし
+
+
+## iOS6 (iPodTouch) fbアプリだけ入ってる
+
+- fb.html
+  - アプリへ遷移出来る
+- tw.html
+  - エラー: `ページが開けません アドレスが無効です`
+- dummy.html
+  - エラー: `ページが開けません アドレスが無効です`
 
 
 ### iOS9.2ではiframeでアプリ遷移ができなくなっている
@@ -59,3 +72,9 @@ https://aws.amazon.com/jp/device-farm/
 - device-farmではappiumを使ってテストを実行する
 - [appiumにはアプリをインストールするAPIがある](
 https://github.com/appium/python-client/blob/47cc892d78bb87293563f50c0439c202f1b6d8ce/appium/webdriver/webdriver.py#L502)
+
+
+# 参考リンク
+
+- [URLスキーム・独自ディープリンク実装に代わる、Universal Links(iOS 9で導入)でより良いUXを実現 - Qiita](http://qiita.com/mono0926/items/2bf651246714f20df626)
+-

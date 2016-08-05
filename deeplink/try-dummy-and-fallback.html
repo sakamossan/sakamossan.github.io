@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <script src="./deeplink.js"></script>
+  <script>
+  (function(){
+    var deeplink = new Deeplink({
+      appDeeplinkURL: "dummy://no-such-app",
+      webFallbackURL: "http://example.com",
+      fallbackDelay: 1000
+    });
+
+    deeplink.open();
+  })();
+  </script>
+</body>
+</html>
