@@ -6,20 +6,22 @@ var Deeplink = (function() {
   };
 
   Deeplink.prototype.open = function () {
+    var self = this;
     var iframe = document.createElement("iframe");
 
     var fallbackTimeout = setTimeout(function(){
       iframe.parentNode.removeChild(iframe);
-      window.open(this.webFallbackURL, '_blank');
+      console.log(self.webFallbackURL);
+      window.open(self.webFallbackURL, '_blank');
     }, this.fallbackDelay);
 
     iframe.onload = function() {
       clearTimeout(fallbackTimeout);
       iframe.parentNode.removeChild(iframe);
-      window.location.href = this.appDeeplinkURL;
+      window.location.href = self.appDeeplinkURL;
     };
 
-    iframe.src = this.appDeeplinkURL;
+    iframe.src = self.appDeeplinkURL;
     iframe.setAttribute("style", "display:none;");
     document.body.appendChild(iframe);
   };

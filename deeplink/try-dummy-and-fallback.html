@@ -5,17 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+  <p id="ad">クリック</p>
   <script src="./deeplink.js"></script>
-  <script>
-  (function(){
-    var deeplink = new Deeplink({
-      appDeeplinkURL: "dummy://no-such-app",
-      webFallbackURL: "http://example.com",
-      fallbackDelay: 1000
-    });
+<script>
+(function(){
 
-    deeplink.open();
-  })();
-  </script>
+  var deeplink = new Deeplink({
+    appDeeplinkURL: "dummy://no-such-app",
+    webFallbackURL: "http://example.com",
+    fallbackDelay: 1000
+  });
+
+  var a = document.getElementById('ad');
+  a.onclick = function(){
+    console.log(1);
+    deeplink.open()
+  };
+
+})();
+</script>
 </body>
 </html>
