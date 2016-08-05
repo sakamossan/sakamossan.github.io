@@ -13,7 +13,7 @@ var Deeplink = (function() {
 
     var fallbackTimeout = setTimeout(function(){
       iframe.parentNode.removeChild(iframe);
-      window.open(self.webFallbackURL, '_blank');
+      window.location.href = self.webFallbackURL;
     }, this.fallbackDelay);
 
     iframe.onload = function() {
