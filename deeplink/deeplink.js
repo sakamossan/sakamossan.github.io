@@ -1,3 +1,3 @@
-(function(grobal) {
-  console.log(1);
-})(this);
+(function() {
+  location.href = "fb://profile";
+})();
