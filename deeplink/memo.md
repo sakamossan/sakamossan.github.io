@@ -40,6 +40,51 @@ window.location.href = "fb://profile";
   - エラー: `ページが開けません アドレスが無効です`
 
 
+# try & fallback
+
+アプリに遷移させようとして、遷移しなかったらWeb面に遷移させる方式
+
+```js
+location.href = webUri;
+setTimeout(() => { location.href = appUri }, 500);
+```
+
+実際のコード: https://github.com/sakamossan/sakamossan.github.io/blob/813c3f483a/deeplink/deeplink.js
+
+
+## iOS9 (iPhone6) twアプリ入り
+
+- try-tw-and-fallback.html
+  - アプリへ遷移出来る
+  - ただし、ブラウザに戻った後に`ブロックしたポップアップ`と出てしまう
+    - clearTimeoutが効いてない?
+- try-dummy-and-fallback.html
+  - webページに遷移できる
+
+
+## Android6 (xperia) twアプリ入り
+
+- try-tw-and-fallback.html
+  - アプリへの遷移とwebページのポップアップが同時に起こってしまう
+- try-dummy-and-fallback.html
+  - webページに遷移できる
+
+
+- fb.html
+  - アプリへ遷移出来る
+- tw.html
+  - アプリへ遷移出来る
+- dummy.html
+  - 何も表示されない
+  - エラーのmodalもなし
+
+
+## ポップアップのブロック
+
+- クリックの伴わない`window.open`を呼ぶとポップアップと判断される
+- setTimeoutを長くしてクリックの2秒後とかにしてもポップアップと判断された(iOS, android両方)
+
+
 ### iOS9.2ではiframeでアプリ遷移ができなくなっている
 
 https://github.com/hampusohlsson/browser-deeplink/issues/16
