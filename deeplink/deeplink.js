@@ -1,3 +1,3 @@
 (function() {
-  location.href = "fb://profile";
+  location.href = "whatsapp://friend";  // "fb://profile";
 })();
