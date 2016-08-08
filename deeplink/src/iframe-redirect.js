@@ -1,7 +1,15 @@
 "use strict";
-var log = require('./util').log;
+var log = require('./utils').log;
+var isAndroid = require('./utils').isAndroid;
+var replaceIntentScheme = require('./utils').replaceIntentScheme;
 
-function iframeRedirect (url) {
+
+function iframeRedirect (url, androidAppId) {
+  if (isAndroid() && androidAppId) {
+    url = replaceIntentScheme(url, androidAppId);
+    log("url is replaced. url:" + url);
+  }
+
   log("iframeRedirect start");
   var iframe = document.createElement('iframe');
 
@@ -16,5 +24,5 @@ function iframeRedirect (url) {
   log("iframe appended");
 }
 
-module.exports =
+
 window.__iframeRedirect = iframeRedirect;
