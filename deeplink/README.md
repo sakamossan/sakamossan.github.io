@@ -76,6 +76,8 @@ https://developer.apple.com/videos/play/wwdc2015/703/
   - setTimeoutを長くしてクリックの2秒後とかにしたらconfirmが出た(iOS, android両方)
 
 
+## androidにおけるintentスキームについて
+
 
 # テストについて
 
