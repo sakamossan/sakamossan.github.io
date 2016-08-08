@@ -41,26 +41,34 @@ iframe.setAttribute("style", "display:none;");
 document.body.appendChild(iframe);
 ```
 
-- [参考ソースコード iframe-redirect.js](https://github.com/sakamossan/sakamossan.github.io/blob/1b34ddf/deeplink/src/iframe-redirect.js)
-- [iframe-redirect-tw.html](https://github.com/sakamossan/sakamossan.github.io/blob/master/deeplink/html/iframe-redirect-tw.html)ではtwitterアプリを起動させている
+- [実装: iframe-redirect.js](https://github.com/sakamossan/sakamossan.github.io/blob/1b34ddf/deeplink/src/iframe-redirect.js)
 
 
 ### iOS9.3 x Safari
 
-エラーにはなっていないが遷移しない
+- アプリが入ってても入ってなくても遷移が起こらない
+- ただし、エラーメッセージなども表示されない
 
-↓のissueで書かれてるとおり
-https://github.com/hampusohlsson/browser-deeplink/issues/16
-
+issueで書かれてるとおりの挙動
 iOS8までだと遷移できていた?(未確認) プライバシーポリシー変更の一環で遷移できなくなっている模様
+https://github.com/hampusohlsson/browser-deeplink/issues/16
 https://developer.apple.com/videos/play/wwdc2015/703/
 ![image](https://cloud.githubusercontent.com/assets/5309672/17427461/cf88826c-5b1b-11e6-9b5a-516d943db9a1.png)
+
+なお、iOS9上のGoogleChromeでも同じ挙動。iOS9以上だとアプリに遷移しないと考えたほうが良さそう。
 
 
 ### Android6.0 x Chrome
 
-- アプリに遷移する
-- ただし、`iframe.onload`イベントが発生しない
+- アプリがインストールされている場合はアプリに遷移する
+- インストールされていない場合はなにも起こらない
+
+
+### `iframe.onload`
+
+- iframe.srcのURLスキームがhttpじゃないと`iframe.onload`が発火しない
+- 以前はこのイベントが発生するか否かでアプリに遷移したかどうかを判定していた
+- フォールバックすべきか否かの判断を別の方法でしなくてはいけない
 
 
 # ポップアップのブロックについて
@@ -105,4 +113,6 @@ https://github.com/appium/python-client/blob/47cc892d78bb87293563f50c0439c202f1b
 
 # 参考リンク
 
+- [javascript - Deeplinking mobile browsers to native app - Issues with Chrome when app isn't installed - Stack Overflow](http://stackoverflow.com/questions/27151806/deeplinking-mobile-browsers-to-native-app-issues-with-chrome-when-app-isnt-in)
+  - iframe以外のやり方を提示している
 - [URLスキーム・独自ディープリンク実装に代わる、Universal Links(iOS 9で導入)でより良いUXを実現 - Qiita](http://qiita.com/mono0926/items/2bf651246714f20df626)
