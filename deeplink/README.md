@@ -41,7 +41,7 @@ iframe.setAttribute("style", "display:none;");
 document.body.appendChild(iframe);
 ```
 
-- [ソースコード iframe-redirect.js](https://github.com/sakamossan/sakamossan.github.io/blob/1b34ddf/deeplink/src/iframe-redirect.js)
+- [参考ソースコード iframe-redirect.js](https://github.com/sakamossan/sakamossan.github.io/blob/1b34ddf/deeplink/src/iframe-redirect.js)
 - [iframe-redirect-tw.html](https://github.com/sakamossan/sakamossan.github.io/blob/master/deeplink/html/iframe-redirect-tw.html)ではtwitterアプリを起動させている
 
 
@@ -52,7 +52,7 @@ document.body.appendChild(iframe);
 ↓のissueで書かれてるとおり
 https://github.com/hampusohlsson/browser-deeplink/issues/16
 
-iOS8までだと遷移できていたがのプライバシーポリシー変更の一環で遷移できなくなっている模様
+iOS8までだと遷移できていた?(未確認) プライバシーポリシー変更の一環で遷移できなくなっている模様
 https://developer.apple.com/videos/play/wwdc2015/703/
 ![image](https://cloud.githubusercontent.com/assets/5309672/17427461/cf88826c-5b1b-11e6-9b5a-516d943db9a1.png)
 
@@ -61,8 +61,6 @@ https://developer.apple.com/videos/play/wwdc2015/703/
 
 - アプリに遷移する
 - ただし、`iframe.onload`イベントが発生しない
-- androidの場合, URLをintentスキームに書き換えると`iframe.onload`イベントが呼ばれるかもしれない(要確認)
-  -  [参考: browser-deeplink/browser-deeplink.js at master · hampusohlsson/browser-deeplink](https://github.com/hampusohlsson/browser-deeplink/blob/master/browser-deeplink.js#L206)
 
 
 # ポップアップのブロックについて
@@ -77,6 +75,9 @@ https://developer.apple.com/videos/play/wwdc2015/703/
 
 
 ## androidにおけるintentスキームについて
+
+- androidではスキーマ部をintentにすることで遷移の挙動を少し変えることが出来る
+- スキーマ部をintentにして、且つURLハッシュ部にアプリIDを含めると「アプリが入ってたら開く,入ってなかったらインストール画面に遷移する」という挙動になる
 
 
 # テストについて
