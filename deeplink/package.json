@@ -4,7 +4,8 @@
   "description": "単純に遷移させるだけ",
   "main": "deeplink.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist/* && ls -1 src/ | xargs -I{} $(npm bin)/browserify src/{} --outfile dist/{}"
   },
   "author": "",
   "license": "ISC",

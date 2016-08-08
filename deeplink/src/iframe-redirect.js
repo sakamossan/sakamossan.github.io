@@ -2,6 +2,7 @@
 var log = require('./log').log;
 
 function iframeRedirect (url) {
+  log("iframeRedirect start");
   var iframe = document.createElement('iframe');
 
   iframe.onload = function() {
