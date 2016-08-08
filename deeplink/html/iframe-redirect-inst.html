@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<script src="../dist/iframe-redirect.js"></script>
 <script>
-  (function(){
-    location.href = "fb://profile";
-  })();
+__iframeRedirect("instagram://app", "com.instagram.android");
 </script>
 </body>
 </html>

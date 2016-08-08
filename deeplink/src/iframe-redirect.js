@@ -7,10 +7,10 @@ var replaceIntentScheme = require('./utils').replaceIntentScheme;
 function iframeRedirect (url, androidAppId) {
   if (isAndroid() && androidAppId) {
     url = replaceIntentScheme(url, androidAppId);
-    log("url is replaced. url:" + url);
+    log("url is replaced. url: " + url);
   }
 
-  log("iframeRedirect start");
+  log("iframeRedirect start with url:" + url);
   var iframe = document.createElement('iframe');
 
   iframe.onload = function() {
