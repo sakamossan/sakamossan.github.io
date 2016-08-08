@@ -59,7 +59,10 @@ https://developer.apple.com/videos/play/wwdc2015/703/
 
 ### Android6.0 x Chrome
 
-遷移する
+- アプリに遷移する
+- ただし、`iframe.onload`イベントが発生しない
+- androidの場合, URLをintentスキームに書き換えると`iframe.onload`イベントが呼ばれるかもしれない(要確認)
+  -  [参考: browser-deeplink/browser-deeplink.js at master · hampusohlsson/browser-deeplink](https://github.com/hampusohlsson/browser-deeplink/blob/master/browser-deeplink.js#L206)
 
 
 # ポップアップのブロックについて

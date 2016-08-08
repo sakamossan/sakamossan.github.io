@@ -1,4 +1,4 @@
-var log = require('./log');
+var log = require('./util').log;
 
 
 var Deeplink = (function() {

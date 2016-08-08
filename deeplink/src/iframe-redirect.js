@@ -1,5 +1,5 @@
 "use strict";
-var log = require('./log').log;
+var log = require('./util').log;
 
 function iframeRedirect (url) {
   log("iframeRedirect start");
@@ -16,5 +16,5 @@ function iframeRedirect (url) {
   log("iframe appended");
 }
 
-
-iframeRedirect("twitter://search?query=%23hash");
+module.exports =
+window.__iframeRedirect = iframeRedirect;
