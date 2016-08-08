@@ -1,3 +1,10 @@
+# Deeplinkメモ
+
+やりたいこと
+
+- アプリがインストールされてたらアプリに遷移する
+- アプリがインストールされてなかったらWeb面に遷移する
+- エラーやポップアップは表示させたくない
 
 
 # 単純に遷移させる
@@ -68,7 +75,14 @@ https://developer.apple.com/videos/play/wwdc2015/703/
 
 - iframe.srcのURLスキームがhttpじゃないと`iframe.onload`が発火しない
 - 以前はこのイベントが発生するか否かでアプリに遷移したかどうかを判定していた
-- フォールバックすべきか否かの判断を別の方法でしなくてはいけない
+- フォールバック(web面に飛ばす)すべきか否かの判断ができない
+
+
+# location.hrefを使用して遷移 & フォールバックさせる
+
+`iframe`方式ではフォールバックするかが判定できないため、`location.href`に代入する方式で実装する
+
+
 
 
 # ポップアップのブロックについて
@@ -116,3 +130,5 @@ https://github.com/appium/python-client/blob/47cc892d78bb87293563f50c0439c202f1b
 - [javascript - Deeplinking mobile browsers to native app - Issues with Chrome when app isn't installed - Stack Overflow](http://stackoverflow.com/questions/27151806/deeplinking-mobile-browsers-to-native-app-issues-with-chrome-when-app-isnt-in)
   - iframe以外のやり方を提示している
 - [URLスキーム・独自ディープリンク実装に代わる、Universal Links(iOS 9で導入)でより良いUXを実現 - Qiita](http://qiita.com/mono0926/items/2bf651246714f20df626)
+- [javascript - Is it secure to use window.location.href directly without validation - Stack Overflow](http://stackoverflow.com/questions/24078332/is-it-secure-to-use-window-location-href-directly-without-validation)
+  - location.href使う場合はなんらかのvalidationが必要
