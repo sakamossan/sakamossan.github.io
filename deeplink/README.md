@@ -82,7 +82,20 @@ https://developer.apple.com/videos/play/wwdc2015/703/
 
 `iframe`方式ではフォールバックするかが判定できないため、`location.href`に代入する方式で実装する
 
+[実装: inject-href-or-fallback.js](https://github.com/sakamossan/sakamossan.github.io/blob/8f3d395/deeplink/src/inject-href-or-fallback.js)
 
+
+### iOS9.3 x Safari
+
+- アプリが入っている場合
+  - アプリを開いて良いかダイアログが出る
+  - ただし1秒後には問答無用でWeb面に遷移してしまう
+
+
+### Android6.0 x Chrome
+
+- アプリが入っている場合
+  - アプリ面に遷移する
 
 
 # ポップアップのブロックについて
