@@ -1,10 +1,5 @@
-var logUl = document.createElement('ul');
-document.body.appendChild(logUl);
-function log (msg) {
-  var li = document.createElement('li');
-  li.innerHTML = msg;
-  logUl.appendChild(li);
-}
+var log = require('./log');
+
 
 var Deeplink = (function() {
   "use strict";
