@@ -7,9 +7,9 @@
 - エラーやポップアップは表示させたくない
 
 
-# 単純に遷移させる
+# まず単純に遷移させる
 
-単純に`location.href`を使用して遷移させる
+単純に`location.href`を使用して遷移させてみる
 
 ```js
 window.location.href = "fb://profile";
@@ -56,13 +56,18 @@ document.body.appendChild(iframe);
 - アプリが入ってても入ってなくても遷移が起こらない
 - ただし、エラーメッセージなども表示されない
 
-issueで書かれてるとおりの挙動
+[issue](https://github.com/hampusohlsson/browser-deeplink/issues/16)で書かれてるとおりの挙動
 iOS8までだと遷移できていた?(未確認) プライバシーポリシー変更の一環で遷移できなくなっている模様
-https://github.com/hampusohlsson/browser-deeplink/issues/16
-https://developer.apple.com/videos/play/wwdc2015/703/
+
+- [Doesn't work on iOS 9 · Issue #16 · hampusohlsson/browser-deeplink](https://github.com/hampusohlsson/browser-deeplink/issues/16)
+- [Privacy and Your App - WWDC 2015 - Videos - Apple Developer](https://developer.apple.com/videos/play/wwdc2015/703/)
 ![image](https://cloud.githubusercontent.com/assets/5309672/17427461/cf88826c-5b1b-11e6-9b5a-516d943db9a1.png)
 
 なお、iOS9上のGoogleChromeでも同じ挙動。iOS9以上だとアプリに遷移しないと考えたほうが良さそう。
+
+AppleはDeeplinkの代わりにUniversalLinkのほうを推進していく方針
+
+- [URLスキーム・独自ディープリンク実装に代わる、Universal Links(iOS 9で導入)でより良いUXを実現 - Qiita](http://qiita.com/mono0926/items/2bf651246714f20df626)
 
 
 ### Android6.0 x Chrome
@@ -87,15 +92,24 @@ https://developer.apple.com/videos/play/wwdc2015/703/
 
 ### iOS9.3 x Safari
 
+先に試した通りの挙動になる
+
 - アプリが入っている場合
   - アプリを開いて良いかダイアログが出る
   - ただし1秒後には問答無用でWeb面に遷移してしまう
+- アプリが入っていない場合
+  - エラーダイアログが出てしまう
+  - エラー: `ページが開けません アドレスが無効です`
 
 
 ### Android6.0 x Chrome
 
+エラーダイアログが表示されない分まだ希望が
+
 - アプリが入っている場合
   - アプリ面に遷移する
+- アプリが入っていない場合
+  - Web面に遷移する
 
 
 # ポップアップのブロックについて
