@@ -2,14 +2,15 @@
 
 # 単純に遷移させる
 
-単純に遷移させるだけ
+単純に`location.href`を使用して遷移させる
 
 ```js
 window.location.href = "fb://profile";
 ```
 
+ここらへんはまだ直感通りに動作してくれる
 
-## iOS9 (iPhone6) fb, twアプリ両方入ってる
+### iOS9 (iPhone6) fb, twアプリ両方入ってる
 
 - fb.html
   - アプリへ遷移出来る
@@ -19,72 +20,58 @@ window.location.href = "fb://profile";
   - エラー: `ページが開けません アドレスが無効です`
 
 
-## Android6 (xperia) fb, twアプリ両方入ってる
+### Android6 (xperia) fb, twアプリ両方入ってる
 
 - fb.html
   - アプリへ遷移出来る
 - tw.html
   - アプリへ遷移出来る
 - dummy.html
-  - 何も表示されない
-  - エラーのmodalもなし
+  - リアクションなし、iOSと違ってモーダルも出なかった
 
 
-## iOS6 (iPodTouch) fbアプリだけ入ってる
+# iframeを使用して遷移させる
 
-- fb.html
-  - アプリへ遷移出来る
-- tw.html
-  - エラー: `ページが開けません アドレスが無効です`
-- dummy.html
-  - エラー: `ページが開けません アドレスが無効です`
-
-
-# try & fallback
-
-アプリに遷移させようとして、遷移しなかったらWeb面に遷移させる方式
+見えないiframeを画面に差し込んで遷移を発生させる方式
 
 ```js
-location.href = webUri;
-setTimeout(() => { location.href = appUri }, 500);
+var iframe = document.createElement('iframe');
+iframe.src = appDeeplinkURL;
+iframe.setAttribute("style", "display:none;");
+document.body.appendChild(iframe);
 ```
 
-実際のコード: https://github.com/sakamossan/sakamossan.github.io/blob/813c3f483a/deeplink/deeplink.js
+- [ソースコード iframe-redirect.js](https://github.com/sakamossan/sakamossan.github.io/blob/1b34ddf/deeplink/src/iframe-redirect.js)
+- [iframe-redirect-tw.html](https://github.com/sakamossan/sakamossan.github.io/blob/master/deeplink/html/iframe-redirect-tw.html)ではtwitterアプリを起動させている
 
 
-## iOS9 (iPhone6) twアプリ入り
+### iOS9.3 x Safari
 
-- try-tw-and-fallback.html
-  - アプリへ遷移出来る
-  - ただし、ブラウザに戻った後に`ブロックしたポップアップ`と出てしまう
-    - clearTimeoutが効いてない?
-- try-dummy-and-fallback.html
-  - webページに遷移できる
+エラーにはなっていないが遷移しない
 
-
-## Android6 (xperia) twアプリ入り
-
-- try-tw-and-fallback.html
-  - アプリへの遷移とwebページのポップアップが同時に起こってしまう
-- try-dummy-and-fallback.html
-  - webページに遷移できる
-
-
-## ポップアップのブロック
-
-- クリックの伴わない`window.open`を呼ぶとポップアップと判断される
-- setTimeoutを長くしてクリックの2秒後とかにしてもポップアップと判断された(iOS, android両方)
-
-
-### iOS9.2ではiframeでアプリ遷移ができなくなっている
-
+↓のissueで書かれてるとおり
 https://github.com/hampusohlsson/browser-deeplink/issues/16
 
-iOS9のプライバシーポリシー変更の一環っぽい
-
+iOS8までだと遷移できていたがのプライバシーポリシー変更の一環で遷移できなくなっている模様
 https://developer.apple.com/videos/play/wwdc2015/703/
-
 ![image](https://cloud.githubusercontent.com/assets/5309672/17427461/cf88826c-5b1b-11e6-9b5a-516d943db9a1.png)
+
+
+### Android6.0 x Chrome
+
+遷移する
+
+
+# ポップアップのブロックについて
+
+`window.open`は適切なタイミングで呼ばないとスパムみたいな扱いを受ける
+
+- クリックの伴わない`window.open`を呼ぶとポップアップと判断される
+- その場合「ポップアップを表示しますか」といったconfirmが出てしまう
+- クリックイベント内で`window.open`を呼んだ場合はconfirmは出ない
+- ただし、クリックイベント内でもあんまり時間差があるとポップアップと判断される
+  - setTimeoutを長くしてクリックの2秒後とかにしたらconfirmが出た(iOS, android両方)
+
 
 
 # テストについて
@@ -113,4 +100,3 @@ https://github.com/appium/python-client/blob/47cc892d78bb87293563f50c0439c202f1b
 # 参考リンク
 
 - [URLスキーム・独自ディープリンク実装に代わる、Universal Links(iOS 9で導入)でより良いUXを実現 - Qiita](http://qiita.com/mono0926/items/2bf651246714f20df626)
--
