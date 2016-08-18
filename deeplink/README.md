@@ -14,7 +14,7 @@
 ソースコードはこちら [sakamossan.github.io/deeplink at master · sakamossan/sakamossan.github.io](https://github.com/sakamossan/sakamossan.github.io/tree/master/deeplink)
 
 
-# 単純にブラウザからアプリに遷移
+## `location.href`を使ってアプリ遷移だけさせる
 
 まず単純に`location.href`を使用して遷移させてみる
 
@@ -22,21 +22,21 @@
 window.location.href = "twitter://profile";
 ```
 
-### iOS9.3 x Safari
+#### iOS9.3 x Safari
 
 - アプリがインストールされてる場合はアプリへ遷移出来る
 - インストールされてないアプリに遷移させようとした場合エラーになる
   - エラー: `ページが開けません アドレスが無効です`
 
 
-### Android6.0 x Chrome
+#### Android6.0 x Chrome
 
 - アプリがインストールされてる場合はアプリへ遷移出来る
 - インストールされてないアプリに遷移させようとした場合エラーになる
   - リアクションなし、iOSと違ってモーダルも出なかった
 
 
-# iframeを使用して遷移させる
+## iframeを使用して遷移させる
 
 - 見えないiframeを画面に差し込んで遷移を発生させる方式
 - `location.href`を直接いじらないのでUIに影響が少なく最近まで重宝されていた
@@ -52,16 +52,15 @@ document.body.appendChild(iframe);
 - [実装: iframe-redirect.js](https://github.com/sakamossan/sakamossan.github.io/blob/1b34ddf/deeplink/src/iframe-redirect.js)
 
 
-### iOS9.3 x Safari
+#### iOS9.3 x Safari
 
 - アプリが入ってても入ってなくても遷移が起こらない
 - ただし、エラーメッセージなども表示されない
-- [Doesn't work on iOS 9 · Issue #16 · hampusohlsson/browser-deeplink](https://github.com/hampusohlsson/browser-deeplink/issues/16)で書かれてるとおりの挙動
+- [Doesn't work on iOS 9 · Issue #16](https://github.com/hampusohlsson/browser-deeplink/issues/16)で書かれてるとおりの挙動
+
 - プライバシーポリシー変更の一環で遷移できなくなっている模様
   - [Privacy and Your App - WWDC 2015 - Videos - Apple Developer](https://developer.apple.com/videos/play/wwdc2015/703/)
-- iOS8までだと遷移できていたかは未確認
-
-なお、iOS9上のGoogleChromeでも同じ挙動。iOS9以上だとアプリに遷移しないと考えたほうが良さそう。
+  - iOS9上のGoogleChromeでも同じ挙動。iOS9以上だとアプリに遷移しないと考えたほうが良さそう
 
 AppleはDeeplinkの代わりにUniversalLinkのほうを推進していく方針
 
@@ -69,12 +68,12 @@ AppleはDeeplinkの代わりにUniversalLinkのほうを推進していく方針
 
 iframe方式はiOS9.2から使えなくなっており、現在ではオワコン化している
 
-### Android6.0 x Chrome
-
-Androidの場合は遷移が発生するが、`iframe.onload`問題が浮上してる状態
+#### Android6.0 x Chrome
 
 - アプリがインストールされている場合はアプリに遷移する
 - インストールされていない場合はなにも起こらない
+
+Androidの場合はiframe方式でも遷移が発生するが、`iframe.onload`問題が浮上してる状態
 
 
 ##### `iframe.onload`問題
@@ -85,17 +84,17 @@ iframe方式だとユーザーがアプリに遷移したかどうかがわか�
 - 以前はこのイベントが発生するか否かでアプリに遷移できたかどうかを判定していた
 - フォールバック(web面に飛ばす)すべきか否かの判断ができない
 
-「フォールバックすべきか否かの判断ができない」という点に置いてiOSと同様使い物にならなくなっている
+「フォールバックすべきか否かの判断ができない」という点がやりたいことにとって致命的
 
 
-# location.hrefを使用して遷移 & フォールバックさせる
+## location.hrefを使用して遷移 & フォールバックさせる
 
 `iframe`方式ではフォールバックするかが判定できないため、遷移部分は`location.href`に代入する方式で実装する
 
 [実装: inject-href-or-fallback.js](https://github.com/sakamossan/sakamossan.github.io/blob/8f3d395/deeplink/src/inject-href-or-fallback.js)
 
 
-### iOS9.3 x Safari
+#### iOS9.3 x Safari
 
 - アプリが入っている場合
   - アプリを開いて良いかダイアログが出る
@@ -111,7 +110,7 @@ iframe方式だとユーザーがアプリに遷移したかどうかがわか�
 *結論: iOSだとやりたいことはできなくなっている, UniversalLinkを使う必要がある*
 
 
-### Android6.0 x Chrome
+#### Android6.0 x Chrome
 
 期待通りの挙動をしてくれる
 
@@ -148,7 +147,7 @@ iframe方式だとユーザーがアプリに遷移したかどうかがわか�
 - 端末 x OS x ブラウザの組み合わせ数が多い
 
 
-### browerstack
+#### browerstack
 
 browerstackはdeeplinkのテストはできない
 
@@ -157,7 +156,7 @@ browerstackはdeeplinkのテストはできない
 https://www.browserstack.com/question/655
 
 
-### device-farm
+#### device-farm
 
 > 前提となるアプリのインストールについて設定してテスト環境を細かく調整し、
 
