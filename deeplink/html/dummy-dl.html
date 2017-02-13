@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+
+<body>
+<script type="text/javascript">
+//<![CDATA[
+var ins = [];
+jsGet();
+function jsGet() {
+    var query = window.location.search.substring(1);
+    var parms = query.split('&');
+    for (var i=0; i<parms.length; i++) {
+        var pos = parms[i].indexOf('=');
+        if (pos > 0) {
+            var key = parms[i].substring(0,pos);
+            var val = parms[i].substring(pos+1);
+            ins[key] = val;
+        }
+    }
+}
+var _dl = "example://search?query=%23hash"  // fallback ins['dl'];
+var _wl = "https://example.com/" // app- ins['wl'];
+if (_dl && _wl){
+    _dl = decodeURIComponent(_dl);
+    _wl = decodeURIComponent(_wl);
+    var _ts = function(){ return new Date().getTime(); };
+    var _sw = 1;
+    var _ts1 = _ts();
+    var _ts2 = _ts1;
+    var _w = function(){
+        if (!_sw) return;
+        var _tsc = _ts();
+        if (_tsc - _ts1 >= 5000) {
+            if (_tsc - _ts2 < 500) window.location = _wl;
+            _sw = 0;
+        } else {
+            setTimeout(_w, 333);
+            _ts2 = _ts();
+        }
+    };
+    window.location = _dl;
+    _w();
+}
+//]]>
+</script>
+</body>
+
+</html>
